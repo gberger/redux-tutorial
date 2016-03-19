@@ -119,6 +119,24 @@ describe('application logic', () => {
         }
       }));
     });
+
+    it('does not allow voting on an invalid entry', () => {
+      const voteState = Map({
+        pair: List.of('Trainspotting', '28 Days Later'),
+        tally: Map({
+          'Trainspotting': 2,
+          '28 Days Later': 1
+        })
+      });
+      const nextState = vote(voteState, 'Sunshine');
+      expect(nextState).to.equal(fromJS({
+        pair: ['Trainspotting', '28 Days Later'],
+        tally: {
+          'Trainspotting': 2,
+          '28 Days Later': 1
+        }
+      }));
+    });
   });
 
 });
